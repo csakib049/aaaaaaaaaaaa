@@ -67,7 +67,7 @@ class shopping{
                       cout<<"\t\t\t\t      Enter password:";
                       cin>>password;
                       cout<<endl;
-                      if(email=="sakib"  && password=="123"){
+                      if(email=="admin"  && password=="123"){
 
                         administrator();
 
