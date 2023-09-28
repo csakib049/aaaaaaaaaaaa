@@ -397,7 +397,7 @@ class shopping{
 
                   }
                   c++;
-                  cout<<"\n\n Do you want t buy another product? If yes press y else no.";
+                  cout<<"\n\n Do you want to buy another product? If yes press y else no.";
                   cin>>choice;
                 }
                 while (choice =="y");
