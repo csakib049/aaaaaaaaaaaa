@@ -474,7 +474,7 @@ void loading()  /////////////////////////////////////For loading animation
        loading();
        system("cls"); //command in C++ is used to clear the console or terminal screen.
        HANDLE h= GetStdHandle(STD_OUTPUT_HANDLE);
-       SetConsoleTextAttribute(h,3);////////////////////////// to add colour in text//////////////////////////
+       SetConsoleTextAttribute(h,7);////////////////////////// to add colour in text//////////////////////////
        shopping s;
        s.menu();
 
