@@ -32,7 +32,7 @@ class shopping{
                     The :: operator is used to specify that menu()
                     is a member of the shopping class.*/
   void shopping :: menu()
-{
+{           system("cls");
      m:
     int choice;
      string email,password;
@@ -98,6 +98,7 @@ class shopping{
         }
 
  void shopping:: administrator(){
+             system("cls");
      Administrator_menu:
       int choice;
        cout<<"\n\n\t\t\t\t       Administrator menu  \n\n";
@@ -150,6 +151,7 @@ class shopping{
          }
 
     void shopping:: buyer(){
+         system("cls");
         buyer_menu:
          int choice;
 
@@ -181,70 +183,80 @@ class shopping{
              goto buyer_menu;
     }
 
-    void shopping :: add()
-    {
-        add:
-        fstream data;
-        int c;
-        int token=0;
-        float p,d;
-        string n;
+ void shopping::add() {
+    system("cls");
 
-        cout<<"\n\n\t\t\t Add new product";
-        cout<<"\n\n\t Product code of the product:";
-        cin>>pricecode;
-        cout<<"\n\n\t Name of the product:";
-        cin>>productname;
-        cout<<"\n\n\t Price of the product:";
-        cin>>price;
-        cout<<"\n\n\t Discount on product";
-        cin>>discount;
+    fstream data;
+    int c[100]; // Use an array to store price codes
+    string productname[100]; // Use an array to store product names
+    float price[100]; // Use an array to store prices
+    float discount[100]; // Use an array to store discounts
+    int token = 0;
+    int pricecode;
+    string n;
+    float p, d;
 
-        data.open("database.txt",ios::in);
+    cout << "\n\n\t\t Add new product";
 
-            if(!data){
-                data.open("database.txt",ios::app|ios::out);
-                data<<" "<<pricecode<<" "<<productname<<" "<<price<<" "<<discount<<"\n";
-                data.close();
-            }else{
+    int i = 0;
 
-               data>>c>>n>>p>>d;
+    while (true) {
+        cout << "\n\n\t Name of product " << i + 1 << ": ";
+        cin >> productname[i];
 
-               while(!data.eof())
-                {
-                    if(c ==pricecode){
+        cout << "\n\n\t Price of the product: ";
+        cin >> price[i];
 
-                        token++;
+        cout << "\n\n\t Discount on product: ";
+        cin >> discount[i];
 
-                    }
-                    data>>c>>n>>p>>d;
-               }
-               data.close();
+        data.open("database.txt", ios::in);
 
-
-               if(token==1){
-                goto add;
-               }else{
-
-                data.open("database.txt",ios::app|ios::out);
-                data<<" "<<pricecode<<" "<<productname<<" "<<price<<" "<<discount<<"\n";
-                data.close();
-
-               }
+        if (!data) {
+            data.close();
+            data.open("database.txt", ios::app | ios::out);
+            data << i + 1 << " " << productname[i] << " " << price[i] << " " << discount[i] << "\n";
+            data.close();
+        } else {
+            bool exists = false;
+            while (data >> c[i] >> n >> p >> d) {
+                if (n == productname[i]) {
+                    exists = true;
+                    break;
+                }
             }
+            data.close();
 
-               cout<<"\n\n\t\t Record inserted";
+            if (exists) {
+                cout << "\nProduct with the same name already exists in the store. Please re-enter.\n";
+            } else {
+                data.open("database.txt", ios::app | ios::out);
+                data << i + 1 << " " << productname[i] << " " << price[i] << " " << discount[i] << "\n";
+                data.close();
+                cout << "\n\n\t\t Record inserted";
+                i++;
+            }
+        }
 
+        cout << "\nDo you want to add another product? (1 for yes, 0 for no): ";
+        cin >> pricecode;
+
+        if (pricecode == 0)
+            break;
     }
+}
 
 
 
     void shopping:: edit()
     {
+         system("cls");
         fstream data,data1;
         int pkey,token=0,c;
         float p,d;
         string n;
+
+          lst();  // show all the list of products......
 
         cout<<"\n\t\t\t Modify the record";
         cout<<"\n\t\t\t product code:";
@@ -298,8 +310,12 @@ class shopping{
 
         void shopping::rem()
         {
+             system("cls");
             fstream data ,data1;
             int pkey,token=0;
+
+                   lst();  // show all the list of products......
+
             cout<<"\n\n\t Delete product";
             cout<<"\n\n\t Product code: ";
             cin>>pkey;
@@ -341,6 +357,7 @@ class shopping{
 
        void shopping:: lst()
        {
+            system("cls");
            fstream data;
            data.open("database.txt",ios::in);
            cout<<"\n\n|____________________________________\n";
@@ -361,6 +378,7 @@ class shopping{
 
       void shopping :: receipt()
       {
+            system("cls");
           fstream data;
           int arrc[100],arrq[100];
           string choice;
