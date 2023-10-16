@@ -376,96 +376,81 @@ class shopping{
        }
 
 
-      void shopping :: receipt()
-      {
-            system("cls");
-          fstream data;
-          int arrc[100],arrq[100];
-          string choice;
-          int c=0;
-          float amount=0,dis=0,total=0;
+   void shopping::receipt() {
+    system("cls");
+    fstream data;
+    int arrc[100], arrq[100];
+    string choice;
+    int c = 0;
+    float amount = 0, dis = 0, total = 0;
 
-          cout<<"\n\n\t\t\t\t RECEIPT ";
-          data.open("database.txt",ios::in);
-          if(!data){
-            cout<<"\n\n Empty database";
-          }else{
-              data.close();
-
-              lst();
-              cout<<"\n_____________________________________\n"<<endl;
-              cout<<"\n                                     \n"<<endl;
-              cout<<"\n         Please place the order      \n"<<endl;
-              cout<<"\n                                     \n"<<endl;
-              cout<<"\n_____________________________________\n"<<endl;
-              do
-              {
-                  m:
-                  cout<<"\n\nEnter product code:";
-                  cin>>arrc[c];
-                  cout<<"\n\nEnter the product quantity:";
-                  cin>>arrq[c];
-                  for(int i=0;i<c;i++)
-                  {
-                      if(arrc[c]==arrc[i])
-                      {
-                          cout<<"\n\n Duplicate product code.Please try again!";
-                          goto m;
-                      }
-
-                  }
-                  c++;
-                  cout<<"\n\n Do you want to buy another product? If yes press y else no.";
-                  cin>>choice;
+    cout << "\n\n\t\t\t\t RECEIPT ";
+    data.open("database.txt", ios::in);
+    if (!data) {
+        cout << "\n\n Empty database";
+    }
+    else {
+        data.close();
+        lst();
+        cout << "\n_____________________________________\n" << endl;
+        cout << "\n                                     \n" << endl;
+        cout << "\n         Please place the order      \n" << endl;
+        cout << "\n                                     \n" << endl;
+        cout << "\n_____________________________________\n" << endl;
+        do {
+            m:
+            cout << "\n\nEnter product code: ";
+            cin >> arrc[c];
+            cout << "\n\nEnter the product quantity: ";
+            cin >> arrq[c];
+            for (int i = 0; i < c; i++) {
+                if (arrc[c] == arrc[i]) {
+                    cout << "\n\n Duplicate product code. Please try again!";
+                    goto m;
                 }
-                while (choice =="y");
+            }
+            c++;
+            cout << "\n\n Do you want to buy another product? If yes press 'y' else 'n'. ";
+            cin >> choice;
+        } while (choice == "y" || choice == "Y");
 
-                cout<<"\n\n\t\t\t_________________________RECEIPT___________________________\n";
-                cout<<"\nProduct No\t Product Name\t Product quantity\tprice\t Total Amount\t Amount with discount\n ";
+        cout << "\n\n\t\t\t_________________________RECEIPT___________________________\n";
+        cout << "Product No\t Product Name\t Product quantity\t Price\t Total Amount\t Amount with discount\n";
 
-
-                for(int i=0;i<c;i++)
-                {
-                    data.open("database.txt",ios::in);
-                    data>>pricecode>>productname>>price>>discount;
-                    while(!data.eof())
-                    {
-                        if(pricecode==arrc[i])
-                        {
-                            amount=price*arrq[i];
-                            discount=amount-(amount*discount/100);
-                            total=total+discount;
-                            cout<<"\n"<<pricecode<<"\t\t  "<<productname<<"\t\t       "<<arrq[i]<<"\t\t  "<<price<<"\t\t"<<amount<<"\t\t  "<<discount;
-
-                        }
-                        data>>pricecode>>productname>>price>>discount;
-                    }
+        for (int i = 0; i < c; i++) {
+            data.open("database.txt", ios::in);
+            while (data >> pricecode >> productname >> price >> discount) {
+                if (pricecode == arrc[i]) {
+                    amount = price * arrq[i];
+                    dis = amount - (amount * discount / 100);
+                    total += dis;
+                    cout << pricecode << "\t\t  " << productname << "\t\t       " << arrq[i] << "\t\t  " << price << "\t\t" << amount << "\t\t  " << dis << endl;
                 }
-                data.close();
+            }
+            data.close();
+        }
+    }
 
-          }
+    cout << "\n\n__________________________________________________________________________________________________";
+    cout << "\n Total Amount: " << total;
 
-          cout<<"\n\n__________________________________________________________________________________________________";
-          cout<<"\n Total Amount: "<<total;
+    cout << "\n\n\n\n\n";
 
+    cout << "\n\t\t  #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#\n";
+    cout << "\n\t\t      =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
+    cout << "\n\t\t      |                                           |";
+    cout << "\n\t\t      |                  THANK                    |";
+    cout << "\n\t\t      |                   YOU                     |";
+    cout << "\n\t\t      |                   FOR                     |";
+    cout << "\n\t\t      |                 SHOPPING                  |";
+    cout << "\n\t\t      |                                           |";
+    cout << "\n\t\t      ---------------------------------------------";
+    cout << "\n\t\t      =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
+    cout << "\n\t\t  **-**-**-**-**-**-**-**-**-**-**-**-**-**-**-**-**-**-**\n";
 
-                      cout<<"\n\n\n\n\n";
-
-           cout<<"\n\t\t  #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#\n";
-           cout<<"\n\t\t      =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
-           cout<<"\n\t\t      |                                           |";
-           cout<<"\n\t\t      |                  THANK                    |";
-           cout<<"\n\t\t      |                   YOU                     |";
-           cout<<"\n\t\t      |                   FOR                     |";
-           cout<<"\n\t\t      |                 SHOPPING                  |";
-           cout<<"\n\t\t      |                                           |";
-           cout<<"\n\t\t      ---------------------------------------------";
-           cout<<"\n\t\t      =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
-           cout<<"\n\t\t  **-**-**-**-**-**-**-**-**-**-**-**-**-**-**-**-**-**-**\n";
-
-           cout<<"\n\n\n\n";
-
+    cout << "\n\n\n\n";
 }
+
 
 
 void loading()  /////////////////////////////////////For loading animation
