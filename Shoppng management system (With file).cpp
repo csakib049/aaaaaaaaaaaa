@@ -43,7 +43,7 @@ class shopping{
   cout<<"\n\t\t      =                  WELCOME                  =";
   cout<<"\n\t\t      =                    TO                     =";
   cout<<"\n\t\t      =                  SHOPPING                 =";
-  cout<<"\n\t\t      =                 MANAGEMENT                =";
+  cout<<"\n\t\t      =                  MANAGEMENT               =";
   cout<<"\n\t\t      =                   SYSTEM                  =";
   cout<<"\n\t\t      =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
   cout<<"\n\t\t  **-**-**-**-**-**-**-**-**-**-**-**-**-**-**-**-**-**-**\n";
@@ -100,6 +100,7 @@ class shopping{
  void shopping:: administrator(){
              system("cls");
      Administrator_menu:
+
       int choice;
        cout<<"\n\n\t\t\t\t       Administrator menu  \n\n";
        cout<<"\t\t\t\t|______1)Add the product_______|"<<endl;
@@ -325,7 +326,7 @@ class shopping{
                 cout<<"File doesn't exist";
             }
             else{
-                data1.open("database1.txt",ios::app|ios::out);
+                data1.open("database1.txt",ios::app|ios::out); //want to open a file in the append mode
                 data>>pricecode>>productname>>price>>discount;
                 while(!data.eof())
                 {
@@ -333,6 +334,7 @@ class shopping{
                     {
                         cout<<"\n\n\t Product deleted successfully";
                         token++;
+                        
                     }
                     else
                     {
@@ -419,17 +421,31 @@ class shopping{
 
         for (int i = 0; i < c; i++) {
             data.open("database.txt", ios::in);
+                        bool isValidCode = false;
             while (data >> pricecode >> productname >> price >> discount) {
                 if (pricecode == arrc[i]) {
+                        isValidCode = true;
                     amount = price * arrq[i];
                     dis = amount - (amount * discount / 100);
                     total += dis;
                     cout << pricecode << "\t\t  " << productname << "\t\t       " << arrq[i] << "\t\t  " << price << "\t\t" << amount << "\t\t  " << dis << endl;
                 }
             }
+            
             data.close();
+
+             if (!isValidCode) {
+                cout << "\n\n Error: Invalid product code. Please check your order and try again. \n";
+                c--;
+                i--;
+
+            }
+
+
         }
     }
+
+
 
     cout << "\n\n__________________________________________________________________________________________________";
     cout << "\n Total Amount: " << total;
@@ -473,8 +489,7 @@ void loading()  /////////////////////////////////////For loading animation
 
    int main()
    {
-
-       loading();
+      loading();
        system("cls"); //command in C++ is used to clear the console or terminal screen.
        HANDLE h= GetStdHandle(STD_OUTPUT_HANDLE);
        SetConsoleTextAttribute(h,7);////////////////////////// to add colour in text//////////////////////////
@@ -483,7 +498,6 @@ void loading()  /////////////////////////////////////For loading animation
 
        return 0;
    }
-
 
 
 
