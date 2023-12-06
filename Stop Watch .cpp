@@ -26,7 +26,7 @@ while(1){
 
     }
     s++;
-    sleep(1);
+    Sleep(1);
     if(s==cycle){   //s==60
         m++;
         s=0;
