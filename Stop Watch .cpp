@@ -27,18 +27,14 @@ while(1){
     }
     s++;
     sleep(1);
-    if(s==cycle){
+    if(s==cycle){   //s==60
         m++;
         s=0;
     }
 
-    if(m==cycle){
+    if(m==cycle){   //m==60
         h++;
         m=0;
     }
-
-
 }
-
-
 }
